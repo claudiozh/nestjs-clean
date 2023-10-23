@@ -1,4 +1,5 @@
 @baseUrl = http://localhost:3000
+@acessToken = {{authenticate.response.body.accessToken}}
 
 # @name create_account
 POST {{baseUrl}}/accounts
@@ -17,6 +18,18 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "claudio@gmail.com",
+    "email": "claudiomedeiros@gmail.com",
     "password": "123456"
+}
+
+###
+
+# @name create_question
+POST {{baseUrl}}/questions
+Content-Type: application/json
+Authorization: Bearer {{acessToken}}
+
+{
+    "title": "Qual a sua cor favorita?",
+    "description": "Estou fazendo uma pesquisa sobre cores e gostaria de saber qual a sua cor favorita."
 }
