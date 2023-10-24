@@ -6,6 +6,7 @@ import { envSchema } from '@/env';
 import { AuthModule } from '@/auth/auth.module';
 import { AuthenticateController } from '@/controllers/authenticate.controller';
 import { CreateQuestionController } from '@/controllers/create-question.controller';
+import { FetchQuestionsController } from '@/controllers/fetch-questions.controller';
 
 @Module({
   imports: [
@@ -16,11 +17,7 @@ import { CreateQuestionController } from '@/controllers/create-question.controll
     }),
     AuthModule,
   ],
-  controllers: [
-    CreateAccountController,
-    AuthenticateController,
-    CreateQuestionController,
-  ],
+  controllers: [CreateAccountController, AuthenticateController, CreateQuestionController, FetchQuestionsController],
   providers: [],
 })
 export class AppModule {}

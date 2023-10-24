@@ -30,6 +30,13 @@ Content-Type: application/json
 Authorization: Bearer {{acessToken}}
 
 {
-    "title": "Qual a sua cor favorita?",
-    "description": "Estou fazendo uma pesquisa sobre cores e gostaria de saber qual a sua cor favorita."
+    "title": "Qual a sua comida favorita?",
+    "content": "Estou fazendo uma pesquisa sobre comidas e gostaria de saber qual a sua comida favorita."
 }
+
+###
+
+# @name fetch_questions
+GET {{baseUrl}}/questions?page=1
+Content-Type: application/json
+Authorization: Bearer {{acessToken}}
