@@ -1,7 +1,8 @@
 import { FetchQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-questions';
-import { ZodValidationPipe } from '@/infra/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { Controller, Get, Query } from '@nestjs/common';
 import { z } from 'zod';
+import { QuestionPresenter } from '@/infra/http/presenters/question-presenter';
 
 const pageQueryParamsSchema = z.string().optional().default('1').transform(Number).pipe(z.number().min(1));
 
@@ -15,9 +16,15 @@ export class FetchQuestionsController {
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamsSchema) {
-    const questions = await this.fetchQuestionsUseCase.execute({
+    const result = await this.fetchQuestionsUseCase.execute({
       page,
     });
+
+    if (result.isLeft()) {
+      throw new Error('Something went wrong');
+    }
+
+    const questions = result.value.questions.map(QuestionPresenter.toHttp);
 
     return {
       questions,
