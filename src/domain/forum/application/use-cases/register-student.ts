@@ -29,12 +29,12 @@ export class RegisterStudentUseCase {
       return left(new StudentAlreadyExistsError(email));
     }
 
-    const passwordHash = await this.hashGenerator.generate(password);
+    const passwordHash = await this.hashGenerator.hash(password);
 
     const student = Student.create({
       name,
       email,
-      password: passwordHash,
+      passwordHash,
     });
 
     await this.studentsRepository.create(student);
