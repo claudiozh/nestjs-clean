@@ -1,4 +1,4 @@
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
+import { FetchQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-questions';
 import { ZodValidationPipe } from '@/infra/pipes/zod-validation.pipe';
 import { Controller, Get, Query } from '@nestjs/common';
 import { z } from 'zod';
@@ -11,18 +11,12 @@ type PageQueryParamsSchema = z.infer<typeof pageQueryParamsSchema>;
 
 @Controller('questions')
 export class FetchQuestionsController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly fetchQuestionsUseCase: FetchQuestionsUseCase) {}
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamsSchema) {
-    const perPage = 20;
-
-    const questions = await this.prismaService.question.findMany({
-      take: perPage,
-      skip: (page - 1) * 1,
-      orderBy: {
-        createdAt: 'desc',
-      },
+    const questions = await this.fetchQuestionsUseCase.execute({
+      page,
     });
 
     return {
