@@ -7,12 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  STUDENT
+  INSTUCTOR
+}
+
 model User {
-  id           String     @id @default(uuid())
+  id           String @id @default(uuid())
   name         String
-  email        String     @unique
-  passwordHash String     @map("password_hash")
-  questions    Question[]
+  email        String @unique
+  passwordHash String @map("password_hash")
+  role         Role   @default(STUDENT)
+
+  questions Question[]
+  answers   Answer[]
 
   @@map("users")
 }
@@ -29,5 +37,25 @@ model Question {
   authorId String @map("author_id")
   author   User   @relation(fields: [authorId], references: [id])
 
+  bestAnswerId String? @unique @map("answer_id")
+  bestAnswer   Answer? @relation("bestAnswer", fields: [bestAnswerId], references: [id])
+
+  answers Answer[]
+
   @@map("questions")
+}
+
+model Answer {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
+  content    String
+  authorId   String    @map("author_id")
+  questionId String
+
+  author       User      @relation(fields: [authorId], references: [id])
+  bestAnswerOn Question? @relation("bestAnswer")
+  question     Question  @relation(fields: [questionId], references: [id])
+
+  @@map("answers")
 }
