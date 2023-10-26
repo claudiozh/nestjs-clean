@@ -1,6 +1,7 @@
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository';
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
 import { FakeHasher } from 'test/cryptography/fake-hasher';
+import { makeStudent } from 'test/factories/make-student';
 
 let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let fakeHasher: FakeHasher;
@@ -14,11 +15,8 @@ describe('Register Student', () => {
   });
 
   it('should be able to register student', async () => {
-    const result = await sut.execute({
-      name: 'John Doe',
-      email: 'jonhdoe@gmail.com',
-      password: '123456',
-    });
+    const student = makeStudent();
+    const result = await sut.execute(student);
 
     expect(result.isRight()).toBe(true);
     expect(inMemoryStudentsRepository.items.length).toBe(1);
@@ -28,13 +26,10 @@ describe('Register Student', () => {
   });
 
   it('should hash student password upon registration', async () => {
-    const result = await sut.execute({
-      name: 'John Doe',
-      email: 'jonhdoe@gmail.com',
-      password: '123456',
-    });
+    const student = makeStudent();
+    const result = await sut.execute(student);
 
-    const hashedPassword = await fakeHasher.hash('123456');
+    const hashedPassword = await fakeHasher.hash(student.password);
 
     expect(result.isRight()).toBe(true);
     expect(inMemoryStudentsRepository.items[0].password).toEqual(hashedPassword);
