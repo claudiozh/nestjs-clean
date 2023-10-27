@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from '@/infra/env';
 import { AuthModule } from '@/infra/auth/auth.module';
 import { HttpModule } from '@/infra/http/http.module';
+import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { HttpModule } from '@/infra/http/http.module';
     DatabaseModule,
     AuthModule,
     HttpModule,
+    CryptographyModule,
   ],
   controllers: [],
   providers: [],
