@@ -8,10 +8,11 @@ import { CreateAccountController } from '@/infra/http/controllers/create-account
 import { CreateQuestionController } from '@/infra/http/controllers/create-question.controller';
 import { FetchQuestionsController } from '@/infra/http/controllers/fetch-questions.controller';
 import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
+import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
 
 @Module({
   imports: [CryptographyModule],
   controllers: [CreateAccountController, AuthenticateController, CreateQuestionController, FetchQuestionsController],
-  providers: [CreateQuestionUseCase, FetchQuestionsUseCase],
+  providers: [CreateQuestionUseCase, FetchQuestionsUseCase, AuthenticateStudentUseCase],
 })
 export class HttpModule {}

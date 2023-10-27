@@ -16,7 +16,7 @@ export class Student extends Entity<StudentProps> {
     return this.props.email;
   }
 
-  get password() {
+  get passwordHash() {
     return this.props.passwordHash;
   }
 
