@@ -1,6 +1,6 @@
 import { FetchQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-questions';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-import { Controller, Get, Query } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { z } from 'zod';
 import { QuestionPresenter } from '@/infra/http/presenters/question-presenter';
 
@@ -21,7 +21,7 @@ export class FetchQuestionsController {
     });
 
     if (result.isLeft()) {
-      throw new Error('Something went wrong');
+      throw new BadRequestException();
     }
 
     const questions = result.value.questions.map(QuestionPresenter.toHttp);
