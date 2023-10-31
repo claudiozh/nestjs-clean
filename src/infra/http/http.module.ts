@@ -9,10 +9,11 @@ import { CreateQuestionController } from '@/infra/http/controllers/create-questi
 import { FetchQuestionsController } from '@/infra/http/controllers/fetch-questions.controller';
 import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
+import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
 
 @Module({
   imports: [CryptographyModule],
   controllers: [CreateAccountController, AuthenticateController, CreateQuestionController, FetchQuestionsController],
-  providers: [CreateQuestionUseCase, FetchQuestionsUseCase, AuthenticateStudentUseCase],
+  providers: [CreateQuestionUseCase, FetchQuestionsUseCase, AuthenticateStudentUseCase, RegisterStudentUseCase],
 })
 export class HttpModule {}
