@@ -6,7 +6,7 @@ import { EnvSchema } from '@/infra/env/env-schema';
 export class EnvService {
   constructor(private configService: ConfigService<EnvSchema, true>) {}
 
-  get<T extends keyof EnvSchema>(key: T) {
-    return this.configService.get<T>(key);
+  get<T extends keyof EnvSchema>(key: T): EnvSchema[T] {
+    return this.configService.get(key);
   }
 }
