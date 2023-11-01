@@ -10,10 +10,24 @@ import { FetchQuestionsController } from '@/infra/http/controllers/fetch-questio
 import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
+import { GetQuestionBySlugController } from '@/infra/http/controllers/get-question-by-slug.controller';
+import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug';
 
 @Module({
   imports: [CryptographyModule],
-  controllers: [CreateAccountController, AuthenticateController, CreateQuestionController, FetchQuestionsController],
-  providers: [CreateQuestionUseCase, FetchQuestionsUseCase, AuthenticateStudentUseCase, RegisterStudentUseCase],
+  controllers: [
+    CreateAccountController,
+    AuthenticateController,
+    CreateQuestionController,
+    FetchQuestionsController,
+    GetQuestionBySlugController,
+  ],
+  providers: [
+    CreateQuestionUseCase,
+    FetchQuestionsUseCase,
+    GetQuestionBySlugUseCase,
+    AuthenticateStudentUseCase,
+    RegisterStudentUseCase,
+  ],
 })
 export class HttpModule {}
