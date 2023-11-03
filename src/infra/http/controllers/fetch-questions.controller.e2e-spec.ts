@@ -41,8 +41,6 @@ describe('Fetch recent questions (E2E)', () => {
 
     const response = await request(app.getHttpServer()).get('/questions').set('Authorization', `Bearer ${accessToken}`);
 
-    console.log(response.body);
-
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       questions: expect.arrayContaining([
