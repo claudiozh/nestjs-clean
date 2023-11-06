@@ -34,6 +34,8 @@ import { CommentOnAnswerController } from '@/infra/http/controllers/comment-on-a
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer';
 import { DeleteAnswerCommentController } from '@/infra/http/controllers/delete-answer-comment.controller';
 import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment';
+import { FetchQuestionCommentsController } from '@/infra/http/controllers/fetch-question-comment.controller';
+import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-question-comments';
 
 @Module({
   imports: [CryptographyModule],
@@ -54,6 +56,7 @@ import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases
     DeleteQuestionCommentController,
     CommentOnAnswerController,
     DeleteAnswerCommentController,
+    FetchQuestionCommentsController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -72,6 +75,7 @@ import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases
     CommentOnAnswerUseCase,
     DeleteQuestionCommentUseCase,
     DeleteAnswerCommentUseCase,
+    FetchQuestionCommentsUseCase,
   ],
 })
 export class HttpModule {}
