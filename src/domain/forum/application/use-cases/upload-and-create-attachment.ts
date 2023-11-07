@@ -3,7 +3,7 @@ import { Either, left, right } from '@/core/either';
 import { InvalidAttachmentError } from '@/domain/forum/application/use-cases/errors/invalid-attachment-type-error';
 import { Attachment } from '@/domain/forum/enterprise/entities/attachment';
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository';
-import { Uploader } from '@/infra/storage/uploader';
+import { Uploader } from '@/domain/forum/application/storage/uploader';
 
 interface UploadAndCreateAttachmentUseCaseRequest {
   fileName: string;
@@ -20,7 +20,7 @@ type UploadAndCreateAttachmentUseCaseResponse = Either<
 
 @Injectable()
 export class UploadAndCreateAttachmentUseCase {
-  constructor(private readonly uploader: Uploader, private readonly attachmentsRepository: AttachmentsRepository) {}
+  constructor(private readonly attachmentsRepository: AttachmentsRepository, private readonly uploader: Uploader) {}
 
   async execute({
     fileName,
