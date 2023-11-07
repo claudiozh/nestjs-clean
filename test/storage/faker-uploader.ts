@@ -9,7 +9,7 @@ interface Upload {
 export class FakeUploader implements Uploader {
   public uploads: Upload[] = [];
 
-  async upload(params: UploadParams): Promise<{ url: string }> {
+  async upload(params: UploadParams): Promise<{ fileKey: string }> {
     const uniqueKey = randomUUID();
     const url = `http://localhost:3000/${params.fileName}-${uniqueKey.toString()}}`;
 
@@ -19,7 +19,7 @@ export class FakeUploader implements Uploader {
     });
 
     return {
-      url,
+      fileKey: uniqueKey.toString(),
     };
   }
 }

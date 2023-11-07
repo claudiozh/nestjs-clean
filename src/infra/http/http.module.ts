@@ -39,9 +39,10 @@ import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cas
 import { FetchAnswerCommentsController } from '@/infra/http/controllers/fetch-answer-comment.controller';
 import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments';
 import { UploadAttachmentController } from '@/infra/http/controllers/upload-attachment.controller';
+import { StorageModule } from '@/infra/storage/storage.module';
 
 @Module({
-  imports: [CryptographyModule],
+  imports: [CryptographyModule, StorageModule],
   controllers: [
     CreateAccountController,
     AuthenticateController,
