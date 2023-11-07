@@ -82,7 +82,7 @@ model Attachment {
   id         String   @id @default(uuid())
   createdAt  DateTime @default(now()) @map("created_at")
   title      String
-  url        String
+  fileKey    String   @map("file_key")
   questionId String?  @map("question_id")
   answerId   String?  @map("answer_id")
 

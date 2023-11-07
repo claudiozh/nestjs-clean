@@ -11,7 +11,7 @@ export class Attachment extends Entity<AttachmentProps> {
     return this.props.title;
   }
 
-  get url() {
+  get fileKey() {
     return this.props.fileKey;
   }
 

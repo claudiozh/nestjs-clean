@@ -37,5 +37,6 @@ describe('Upload attachments (E2E)', () => {
       .attach('file', './test/files/sample-upload.jpg');
 
     expect(response.statusCode).toBe(201);
+    expect(response.body).toHaveProperty('attachmentId');
   });
 });
