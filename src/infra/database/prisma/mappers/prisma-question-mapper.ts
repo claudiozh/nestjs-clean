@@ -11,7 +11,9 @@ export class PrismaQuestionMapper {
         content: raw.content,
         slug: Slug.create(raw.slug),
         authorId: new UniqueEntityID(raw.authorId),
-        bestAnswerId: raw.bestAnswerId ? new UniqueEntityID(raw.bestAnswerId) : null,
+        bestAnswerId: raw.bestAnswerId
+          ? new UniqueEntityID(raw.bestAnswerId)
+          : null,
         createdAt: raw.createdAt,
         updatedAt: raw.updatedAt,
       },
@@ -19,7 +21,9 @@ export class PrismaQuestionMapper {
     );
   }
 
-  static toPersistence(question: Question): Prisma.QuestionUncheckedCreateInput {
+  static toPersistence(
+    question: Question,
+  ): Prisma.QuestionUncheckedCreateInput {
     return {
       id: question.id.toString(),
       authorId: question.authorId.toString(),

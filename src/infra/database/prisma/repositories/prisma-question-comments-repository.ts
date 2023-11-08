@@ -8,7 +8,9 @@ import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-obje
 import { PrismaCommentWithAuthorMapper } from '@/infra/database/prisma/mappers/prisma-comment-with-author-mapper';
 
 @Injectable()
-export class PrismaQuestionCommentsRepository implements QuestionCommentsRepository {
+export class PrismaQuestionCommentsRepository
+  implements QuestionCommentsRepository
+{
   constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<QuestionComment | null> {
@@ -25,7 +27,10 @@ export class PrismaQuestionCommentsRepository implements QuestionCommentsReposit
     return PrismaQuestionCommentMapper.toDomain(questionComment);
   }
 
-  async findManyByQuestionId(questionId: string, { page }: PaginationParams): Promise<QuestionComment[]> {
+  async findManyByQuestionId(
+    questionId: string,
+    { page }: PaginationParams,
+  ): Promise<QuestionComment[]> {
     const questionComments = await this.prisma.comment.findMany({
       where: {
         questionId,
@@ -40,7 +45,10 @@ export class PrismaQuestionCommentsRepository implements QuestionCommentsReposit
     return questionComments.map(PrismaQuestionCommentMapper.toDomain);
   }
 
-  async findManyByQuestionIdWithAuthor(questionId: string, { page }: PaginationParams): Promise<CommentWithAuthor[]> {
+  async findManyByQuestionIdWithAuthor(
+    questionId: string,
+    { page }: PaginationParams,
+  ): Promise<CommentWithAuthor[]> {
     const questionComments = await this.prisma.comment.findMany({
       where: {
         questionId,

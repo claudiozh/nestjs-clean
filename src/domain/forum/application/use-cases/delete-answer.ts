@@ -9,13 +9,19 @@ interface DeleteAnswerUseCaseRequest {
   answerId: string;
 }
 
-type DeleteAnswerUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, null>;
+type DeleteAnswerUseCaseResponse = Either<
+  ResourceNotFoundError | NotAllowedError,
+  null
+>;
 
 @Injectable()
 export class DeleteAnswerUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
-  async execute({ answerId, authorId }: DeleteAnswerUseCaseRequest): Promise<DeleteAnswerUseCaseResponse> {
+  async execute({
+    answerId,
+    authorId,
+  }: DeleteAnswerUseCaseRequest): Promise<DeleteAnswerUseCaseResponse> {
     const answer = await this.answersRepository.findById(answerId);
 
     if (!answer) {

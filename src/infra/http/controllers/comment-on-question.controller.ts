@@ -2,7 +2,13 @@ import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/c
 import { AuthUser } from '@/infra/auth/auth-user.decorator';
 import { IAuthUser } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-import { BadRequestException, Body, Controller, Param, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { z } from 'zod';
 
 const commentOnQuestionBodySchema = z.object({
@@ -17,7 +23,8 @@ export class CommentOnQuestionController {
 
   @Post()
   async handle(
-    @Body(new ZodValidationPipe(commentOnQuestionBodySchema)) body: CommentOnQuestionBody,
+    @Body(new ZodValidationPipe(commentOnQuestionBodySchema))
+    body: CommentOnQuestionBody,
     @AuthUser() user: IAuthUser,
     @Param('questionId') questionId: string,
   ) {

@@ -17,16 +17,22 @@ export class DomainEvents {
   }
 
   private static dispatchAggregateEvents(aggregate: AggregateRoot<unknown>) {
-    aggregate.domainEvents.forEach((event: DomainEvent) => this.dispatch(event));
+    aggregate.domainEvents.forEach((event: DomainEvent) =>
+      this.dispatch(event),
+    );
   }
 
-  private static removeAggregateFromMarkedDispatchList(aggregate: AggregateRoot<unknown>) {
+  private static removeAggregateFromMarkedDispatchList(
+    aggregate: AggregateRoot<unknown>,
+  ) {
     const index = this.markedAggregates.findIndex((a) => a.equals(aggregate));
 
     this.markedAggregates.splice(index, 1);
   }
 
-  private static findMarkedAggregateByID(id: UniqueEntityID): AggregateRoot<unknown> | undefined {
+  private static findMarkedAggregateByID(
+    id: UniqueEntityID,
+  ): AggregateRoot<unknown> | undefined {
     return this.markedAggregates.find((aggregate) => aggregate.id.equals(id));
   }
 
@@ -40,7 +46,10 @@ export class DomainEvents {
     }
   }
 
-  public static register(callback: DomainEventCallback, eventClassName: string) {
+  public static register(
+    callback: DomainEventCallback,
+    eventClassName: string,
+  ) {
     const wasEventRegisteredBefore = eventClassName in this.handlersMap;
 
     if (!wasEventRegisteredBefore) {

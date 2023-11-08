@@ -20,7 +20,9 @@ export class PrismaAnswerCommentMapper {
     );
   }
 
-  static toPersistence(answerComment: AnswerComment): Prisma.CommentUncheckedCreateInput {
+  static toPersistence(
+    answerComment: AnswerComment,
+  ): Prisma.CommentUncheckedCreateInput {
     return {
       id: answerComment.id.toString(),
       answerId: answerComment.answerId.toString(),

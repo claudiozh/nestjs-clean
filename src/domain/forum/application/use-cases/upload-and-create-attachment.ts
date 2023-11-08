@@ -20,7 +20,10 @@ type UploadAndCreateAttachmentUseCaseResponse = Either<
 
 @Injectable()
 export class UploadAndCreateAttachmentUseCase {
-  constructor(private readonly attachmentsRepository: AttachmentsRepository, private readonly uploader: Uploader) {}
+  constructor(
+    private readonly attachmentsRepository: AttachmentsRepository,
+    private readonly uploader: Uploader,
+  ) {}
 
   async execute({
     fileName,

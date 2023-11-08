@@ -43,10 +43,11 @@ describe('Delete question comment (E2E)', () => {
       authorId: user.id,
     });
 
-    const questionComment = await questionCommentFactory.makePrismaQuestionComment({
-      authorId: user.id,
-      questionId: question.id,
-    });
+    const questionComment =
+      await questionCommentFactory.makePrismaQuestionComment({
+        authorId: user.id,
+        questionId: question.id,
+      });
 
     const questionCommentId = questionComment.id.toString();
 

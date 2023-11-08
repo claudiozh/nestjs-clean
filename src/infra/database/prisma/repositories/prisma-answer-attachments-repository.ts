@@ -7,7 +7,9 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { PrismaAnswerAttachmentMapper } from '@/infra/database/prisma/mappers/prisma-answer-attachment-mapper';
 
 @Injectable()
-export class PrismaAnswerAttachmentsRepository implements AnswerAttachmentsRepository {
+export class PrismaAnswerAttachmentsRepository
+  implements AnswerAttachmentsRepository
+{
   constructor(private readonly prismaService: PrismaService) {}
 
   async findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {

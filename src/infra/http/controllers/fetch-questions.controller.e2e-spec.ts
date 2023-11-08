@@ -35,11 +35,19 @@ describe('Fetch recent questions (E2E)', () => {
     });
 
     await Promise.all([
-      questionFactory.makePrismaQuestion({ authorId: user.id, title: 'Question 01' }),
-      questionFactory.makePrismaQuestion({ authorId: user.id, title: 'Question 02' }),
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'Question 01',
+      }),
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'Question 02',
+      }),
     ]);
 
-    const response = await request(app.getHttpServer()).get('/questions').set('Authorization', `Bearer ${accessToken}`);
+    const response = await request(app.getHttpServer())
+      .get('/questions')
+      .set('Authorization', `Bearer ${accessToken}`);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({

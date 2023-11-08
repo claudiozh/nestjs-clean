@@ -28,7 +28,9 @@ export class Question extends AggregateRoot<QuestionProps> {
 
   set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null) {
     if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
-      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId));
+      this.addDomainEvent(
+        new QuestionBestAnswerChosenEvent(this, bestAnswerId),
+      );
     }
 
     this.props.bestAnswerId = bestAnswerId;
@@ -89,7 +91,10 @@ export class Question extends AggregateRoot<QuestionProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>, id?: UniqueEntityID) {
+  static create(
+    props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>,
+    id?: UniqueEntityID,
+  ) {
     const question = new Question(
       {
         ...props,

@@ -4,7 +4,9 @@ import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment
 import { InMemoryStudentsRepository } from './in-memory-students-repository';
 import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
 
-export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepository {
+export class InMemoryAnswerCommentsRepository
+  implements AnswerCommentsRepository
+{
   public items: AnswerComment[] = [];
 
   constructor(private studentsRepository: InMemoryStudentsRepository) {}
@@ -27,7 +29,10 @@ export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepositor
     return answerComments;
   }
 
-  async findManyByAnswerIdWithAuthor(answerId: string, { page }: PaginationParams) {
+  async findManyByAnswerIdWithAuthor(
+    answerId: string,
+    { page }: PaginationParams,
+  ) {
     const answerComments = this.items
       .filter((item) => item.answerId.toString() === answerId)
       .slice((page - 1) * 20, page * 20)
@@ -37,7 +42,9 @@ export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepositor
         });
 
         if (!author) {
-          throw new Error(`Author with ID "${comment.authorId.toString()} does not exist."`);
+          throw new Error(
+            `Author with ID "${comment.authorId.toString()} does not exist."`,
+          );
         }
 
         return CommentWithAuthor.create({
@@ -58,7 +65,9 @@ export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepositor
   }
 
   async delete(answerComment: AnswerComment) {
-    const itemIndex = this.items.findIndex((item) => item.id === answerComment.id);
+    const itemIndex = this.items.findIndex(
+      (item) => item.id === answerComment.id,
+    );
 
     this.items.splice(itemIndex, 1);
   }

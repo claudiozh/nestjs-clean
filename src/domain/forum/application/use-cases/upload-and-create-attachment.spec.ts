@@ -12,7 +12,10 @@ describe('Upload and create attachment', () => {
     inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository();
     uploader = new FakeUploader();
 
-    sut = new UploadAndCreateAttachmentUseCase(inMemoryAttachmentsRepository, uploader);
+    sut = new UploadAndCreateAttachmentUseCase(
+      inMemoryAttachmentsRepository,
+      uploader,
+    );
   });
 
   it('should be able to upload and create an attachment', async () => {

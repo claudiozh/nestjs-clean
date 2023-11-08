@@ -16,12 +16,21 @@ let sut: ChooseQuestionBestAnswerUseCase;
 
 describe('Choose Question Best Answer', () => {
   beforeEach(() => {
-    inMemoryAnswerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(inMemoryQuestionAttachmentsRepository);
-    inMemoryAnswersRepository = new InMemoryAnswersRepository(inMemoryAnswerAttachmentsRepository);
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository();
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository();
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    );
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    );
 
-    sut = new ChooseQuestionBestAnswerUseCase(inMemoryQuestionsRepository, inMemoryAnswersRepository);
+    sut = new ChooseQuestionBestAnswerUseCase(
+      inMemoryQuestionsRepository,
+      inMemoryAnswersRepository,
+    );
   });
 
   it('should be able to choose the question best answer', async () => {
@@ -39,7 +48,9 @@ describe('Choose Question Best Answer', () => {
       authorId: question.authorId.toString(),
     });
 
-    expect(inMemoryQuestionsRepository.items[0].bestAnswerId).toEqual(answer.id);
+    expect(inMemoryQuestionsRepository.items[0].bestAnswerId).toEqual(
+      answer.id,
+    );
   });
 
   it('should not be able to to choose another user question best answer', async () => {

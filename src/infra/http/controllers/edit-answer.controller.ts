@@ -2,7 +2,15 @@ import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-ans
 import { AuthUser } from '@/infra/auth/auth-user.decorator';
 import { IAuthUser } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-import { BadRequestException, Body, Controller, HttpCode, HttpStatus, Param, Put } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Put,
+} from '@nestjs/common';
 import { z } from 'zod';
 
 const editAnswerBodySchema = z.object({

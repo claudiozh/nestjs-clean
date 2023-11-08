@@ -1,4 +1,7 @@
-import { UploadParams, Uploader } from '@/domain/forum/application/storage/uploader';
+import {
+  UploadParams,
+  Uploader,
+} from '@/domain/forum/application/storage/uploader';
 import { randomUUID } from 'node:crypto';
 
 interface Upload {
@@ -11,7 +14,9 @@ export class FakeUploader implements Uploader {
 
   async upload(params: UploadParams): Promise<{ fileKey: string }> {
     const uniqueKey = randomUUID();
-    const url = `http://localhost:3000/${params.fileName}-${uniqueKey.toString()}}`;
+    const url = `http://localhost:3000/${
+      params.fileName
+    }-${uniqueKey.toString()}}`;
 
     this.uploads.push({
       fileName: params.fileName,

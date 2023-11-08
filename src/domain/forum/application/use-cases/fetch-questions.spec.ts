@@ -9,15 +9,24 @@ let sut: FetchQuestionsUseCase;
 
 describe('Fetch Questions', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(inMemoryQuestionAttachmentsRepository);
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository();
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    );
     sut = new FetchQuestionsUseCase(inMemoryQuestionsRepository);
   });
 
   it('should be able to fetch questions', async () => {
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 20) }));
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 18) }));
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 23) }));
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 20) }),
+    );
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 18) }),
+    );
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 23) }),
+    );
 
     const result = await sut.execute({
       page: 1,

@@ -9,7 +9,10 @@ interface DeleteAnswerCommentUseCaseRequest {
   answerCommentId: string;
 }
 
-type DeleteAnswerCommentUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, null>;
+type DeleteAnswerCommentUseCaseResponse = Either<
+  ResourceNotFoundError | NotAllowedError,
+  null
+>;
 
 @Injectable()
 export class DeleteAnswerCommentUseCase {
@@ -19,7 +22,9 @@ export class DeleteAnswerCommentUseCase {
     authorId,
     answerCommentId,
   }: DeleteAnswerCommentUseCaseRequest): Promise<DeleteAnswerCommentUseCaseResponse> {
-    const answerComment = await this.answerCommentsRepository.findById(answerCommentId);
+    const answerComment = await this.answerCommentsRepository.findById(
+      answerCommentId,
+    );
 
     if (!answerComment) {
       return left(new ResourceNotFoundError());

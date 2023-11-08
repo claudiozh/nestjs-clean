@@ -25,14 +25,20 @@ export class AuthenticateStudentUseCase {
     private readonly encrypter: Encrypter,
   ) {}
 
-  async execute({ email, password }: AuthenticateStudentUseCaseRequest): Promise<AuthenticateStudentUseCaseResponse> {
+  async execute({
+    email,
+    password,
+  }: AuthenticateStudentUseCaseRequest): Promise<AuthenticateStudentUseCaseResponse> {
     const student = await this.studentsRepository.findByEmail(email);
 
     if (!student) {
       return left(new WrongCredentialsError());
     }
 
-    const passwordMatch = await this.hashComparer.compare(password, student.passwordHash);
+    const passwordMatch = await this.hashComparer.compare(
+      password,
+      student.passwordHash,
+    );
 
     if (!passwordMatch) {
       return left(new WrongCredentialsError());

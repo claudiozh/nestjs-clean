@@ -11,11 +11,18 @@ let sut: CommentOnQuestionUseCase;
 
 describe('Comment on Question', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(inMemoryQuestionAttachmentsRepository);
-    inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository();
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository();
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    );
+    inMemoryQuestionCommentsRepository =
+      new InMemoryQuestionCommentsRepository();
 
-    sut = new CommentOnQuestionUseCase(inMemoryQuestionsRepository, inMemoryQuestionCommentsRepository);
+    sut = new CommentOnQuestionUseCase(
+      inMemoryQuestionsRepository,
+      inMemoryQuestionCommentsRepository,
+    );
   });
 
   it('should be able to comment on question', async () => {
@@ -29,6 +36,8 @@ describe('Comment on Question', () => {
       content: 'Comentário teste',
     });
 
-    expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual('Comentário teste');
+    expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual(
+      'Comentário teste',
+    );
   });
 });

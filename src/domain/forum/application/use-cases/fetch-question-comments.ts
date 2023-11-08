@@ -23,9 +23,13 @@ export class FetchQuestionCommentsUseCase {
     questionId,
     page,
   }: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
-    const comments = await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(questionId, {
-      page,
-    });
+    const comments =
+      await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(
+        questionId,
+        {
+          page,
+        },
+      );
 
     return right({
       comments,

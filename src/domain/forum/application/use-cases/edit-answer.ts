@@ -46,9 +46,12 @@ export class EditAnswerUseCase {
       return left(new NotAllowedError());
     }
 
-    const currentAnswerAttachments = await this.answerAttachmentsRepository.findManyByAnswerId(answerId);
+    const currentAnswerAttachments =
+      await this.answerAttachmentsRepository.findManyByAnswerId(answerId);
 
-    const answerAttachmentList = new AnswerAttachmentList(currentAnswerAttachments);
+    const answerAttachmentList = new AnswerAttachmentList(
+      currentAnswerAttachments,
+    );
 
     const answerAttachments = attachmentsIds.map((attachmentId) => {
       return AnswerAttachment.create({

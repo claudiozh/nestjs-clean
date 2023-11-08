@@ -38,6 +38,8 @@ describe('Register Student', () => {
     const hashedPassword = await fakeHasher.hash('123456');
 
     expect(result.isRight()).toBe(true);
-    expect(inMemoryStudentsRepository.items[0].passwordHash).toEqual(hashedPassword);
+    expect(inMemoryStudentsRepository.items[0].passwordHash).toEqual(
+      hashedPassword,
+    );
   });
 });

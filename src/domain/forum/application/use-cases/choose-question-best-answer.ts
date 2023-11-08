@@ -20,7 +20,10 @@ type ChooseQuestionBestAnswerUseCaseResponse = Either<
 
 @Injectable()
 export class ChooseQuestionBestAnswerUseCase {
-  constructor(private questionsRepository: QuestionsRepository, private answersRepository: AnswersRepository) {}
+  constructor(
+    private questionsRepository: QuestionsRepository,
+    private answersRepository: AnswersRepository,
+  ) {}
 
   async execute({
     answerId,
@@ -32,7 +35,9 @@ export class ChooseQuestionBestAnswerUseCase {
       return left(new ResourceNotFoundError());
     }
 
-    const question = await this.questionsRepository.findById(answer.questionId.toString());
+    const question = await this.questionsRepository.findById(
+      answer.questionId.toString(),
+    );
 
     if (!question) {
       return left(new ResourceNotFoundError());

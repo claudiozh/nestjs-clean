@@ -4,7 +4,12 @@ import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { z } from 'zod';
 import { QuestionPresenter } from '@/infra/http/presenters/question-presenter';
 
-const pageQueryParamsSchema = z.string().optional().default('1').transform(Number).pipe(z.number().min(1));
+const pageQueryParamsSchema = z
+  .string()
+  .optional()
+  .default('1')
+  .transform(Number)
+  .pipe(z.number().min(1));
 
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamsSchema);
 
@@ -15,7 +20,9 @@ export class FetchQuestionsController {
   constructor(private readonly fetchQuestionsUseCase: FetchQuestionsUseCase) {}
 
   @Get()
-  async handle(@Query('page', queryValidationPipe) page: PageQueryParamsSchema) {
+  async handle(
+    @Query('page', queryValidationPipe) page: PageQueryParamsSchema,
+  ) {
     const result = await this.fetchQuestionsUseCase.execute({
       page,
     });

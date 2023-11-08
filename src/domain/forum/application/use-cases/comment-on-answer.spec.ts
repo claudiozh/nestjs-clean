@@ -11,11 +11,17 @@ let sut: CommentOnAnswerUseCase;
 
 describe('Comment on Answer', () => {
   beforeEach(() => {
-    inMemoryAnswerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
-    inMemoryAnswersRepository = new InMemoryAnswersRepository(inMemoryAnswerAttachmentsRepository);
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository();
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    );
     inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository();
 
-    sut = new CommentOnAnswerUseCase(inMemoryAnswersRepository, inMemoryAnswerCommentsRepository);
+    sut = new CommentOnAnswerUseCase(
+      inMemoryAnswersRepository,
+      inMemoryAnswerCommentsRepository,
+    );
   });
 
   it('should be able to comment on answer', async () => {
@@ -29,6 +35,8 @@ describe('Comment on Answer', () => {
       content: 'Comentário teste',
     });
 
-    expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual('Comentário teste');
+    expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual(
+      'Comentário teste',
+    );
   });
 });

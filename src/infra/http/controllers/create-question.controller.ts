@@ -18,7 +18,8 @@ export class CreateQuestionController {
 
   @Post()
   async handle(
-    @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBody,
+    @Body(new ZodValidationPipe(createQuestionBodySchema))
+    body: CreateQuestionBody,
     @AuthUser() user: IAuthUser,
   ) {
     const { title, content } = body;

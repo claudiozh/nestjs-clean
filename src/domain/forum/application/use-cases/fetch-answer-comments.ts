@@ -19,10 +19,17 @@ type FetchAnswerCommentsUseCaseResponse = Either<
 export class FetchAnswerCommentsUseCase {
   constructor(private answerCommentsRepository: AnswerCommentsRepository) {}
 
-  async execute({ answerId, page }: FetchAnswerCommentsUseCaseRequest): Promise<FetchAnswerCommentsUseCaseResponse> {
-    const comments = await this.answerCommentsRepository.findManyByAnswerIdWithAuthor(answerId, {
-      page,
-    });
+  async execute({
+    answerId,
+    page,
+  }: FetchAnswerCommentsUseCaseRequest): Promise<FetchAnswerCommentsUseCaseResponse> {
+    const comments =
+      await this.answerCommentsRepository.findManyByAnswerIdWithAuthor(
+        answerId,
+        {
+          page,
+        },
+      );
 
     return right({
       comments,

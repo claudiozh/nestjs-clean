@@ -1,5 +1,8 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { UploadParams, Uploader } from '@/domain/forum/application/storage/uploader';
+import {
+  UploadParams,
+  Uploader,
+} from '@/domain/forum/application/storage/uploader';
 import { EnvService } from '@/infra/env/env.service';
 import { randomUUID } from 'node:crypto';
 import { Injectable } from '@nestjs/common';
@@ -22,7 +25,11 @@ export class R2Storage implements Uploader {
     });
   }
 
-  async upload({ fileName, fileType, body }: UploadParams): Promise<{ fileKey: string }> {
+  async upload({
+    fileName,
+    fileType,
+    body,
+  }: UploadParams): Promise<{ fileKey: string }> {
     const uploadId = randomUUID();
     const uniqueFileName = `${uploadId}-${fileName}`;
 

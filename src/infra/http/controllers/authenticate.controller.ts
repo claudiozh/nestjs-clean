@@ -2,7 +2,14 @@ import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases
 import { WrongCredentialsError } from '@/domain/forum/application/use-cases/errors/wrong-credentials-error';
 import { Public } from '@/infra/auth/public';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-import { BadRequestException, Body, Controller, Post, UnauthorizedException, UsePipes } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  UnauthorizedException,
+  UsePipes,
+} from '@nestjs/common';
 import { z } from 'zod';
 
 const authenticateBodySchema = z.object({
@@ -15,14 +22,19 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>;
 @Public()
 @Controller('sessions')
 export class AuthenticateController {
-  constructor(private readonly authenticationStudent: AuthenticateStudentUseCase) {}
+  constructor(
+    private readonly authenticationStudent: AuthenticateStudentUseCase,
+  ) {}
 
   @Post()
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body;
 
-    const result = await this.authenticationStudent.execute({ email, password });
+    const result = await this.authenticationStudent.execute({
+      email,
+      password,
+    });
 
     if (result.isLeft()) {
       const error = result.value;

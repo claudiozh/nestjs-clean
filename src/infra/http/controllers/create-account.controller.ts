@@ -2,7 +2,14 @@ import { StudentAlreadyExistsError } from '@/domain/forum/application/use-cases/
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
 import { Public } from '@/infra/auth/public';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-import { BadRequestException, Body, ConflictException, Controller, Post, UsePipes } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  ConflictException,
+  Controller,
+  Post,
+  UsePipes,
+} from '@nestjs/common';
 import { z } from 'zod';
 
 const createAccountBodySchema = z.object({
@@ -16,7 +23,9 @@ type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>;
 @Public()
 @Controller('accounts')
 export class CreateAccountController {
-  constructor(private readonly registerStudentUseCase: RegisterStudentUseCase) {}
+  constructor(
+    private readonly registerStudentUseCase: RegisterStudentUseCase,
+  ) {}
 
   @Post()
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))

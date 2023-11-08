@@ -20,10 +20,19 @@ type RegisterStudentUseCaseResponse = Either<
 
 @Injectable()
 export class RegisterStudentUseCase {
-  constructor(private readonly studentsRepository: StudentsRepository, private readonly hashGenerator: HashGenerator) {}
+  constructor(
+    private readonly studentsRepository: StudentsRepository,
+    private readonly hashGenerator: HashGenerator,
+  ) {}
 
-  async execute({ name, email, password }: RegisterStudentUseCaseRequest): Promise<RegisterStudentUseCaseResponse> {
-    const studentWithSameEmail = await this.studentsRepository.findByEmail(email);
+  async execute({
+    name,
+    email,
+    password,
+  }: RegisterStudentUseCaseRequest): Promise<RegisterStudentUseCaseResponse> {
+    const studentWithSameEmail = await this.studentsRepository.findByEmail(
+      email,
+    );
 
     if (studentWithSameEmail) {
       return left(new StudentAlreadyExistsError(email));

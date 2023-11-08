@@ -1,7 +1,14 @@
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question';
 import { AuthUser } from '@/infra/auth/auth-user.decorator';
 import { IAuthUser } from '@/infra/auth/jwt.strategy';
-import { BadRequestException, Controller, Delete, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  Param,
+} from '@nestjs/common';
 
 @Controller('questions/:id')
 export class DeleteQuestionController {

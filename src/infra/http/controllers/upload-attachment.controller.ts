@@ -13,7 +13,9 @@ import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use
 
 @Controller('attachments')
 export class UploadAttachmentController {
-  constructor(private readonly uploadAndCreateAttachment: UploadAndCreateAttachmentUseCase) {}
+  constructor(
+    private readonly uploadAndCreateAttachment: UploadAndCreateAttachmentUseCase,
+  ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))

@@ -14,7 +14,11 @@ describe('Authenticate Student', () => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository();
     fakeHasher = new FakeHasher();
     fakeEncrypter = new FakeEncrypter();
-    sut = new AuthenticateStudentUseCase(inMemoryStudentsRepository, fakeHasher, fakeEncrypter);
+    sut = new AuthenticateStudentUseCase(
+      inMemoryStudentsRepository,
+      fakeHasher,
+      fakeEncrypter,
+    );
   });
 
   it('should be able to authenticate student', async () => {

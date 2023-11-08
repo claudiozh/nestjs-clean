@@ -6,7 +6,10 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { PrismaAnswerMapper } from '@/infra/database/prisma/mappers/prisma-answer-mapper';
 
-export function makeAnswer(override: Partial<AnswerProps> = {}, id?: UniqueEntityID) {
+export function makeAnswer(
+  override: Partial<AnswerProps> = {},
+  id?: UniqueEntityID,
+) {
   const answer = Answer.create(
     {
       authorId: new UniqueEntityID(),
